@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#6aaa64">
+  <meta name="description" content="Turkce kelime tahmin oyunu - Wordle Turkce! 4, 5 veya 6 harfli kelimelerle sinirsiz oyna.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Wordle TR">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Wordle Turkce</title>
+</head>
+<body>
+  <div id="game-container">
+    <!-- Header -->
+    <header id="header">
+      <div class="header-left">
+        <button id="btn-help" class="header-btn" aria-label="Yardim">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="header-center">
+        <h1>WORDLE TURKCE</h1>
+      </div>
+      <div class="header-right">
+        <button id="btn-stats" class="header-btn" aria-label="Istatistikler">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+        </button>
+        <button id="btn-settings" class="header-btn" aria-label="Ayarlar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Harf uzunlugu secici -->
+    <div id="word-length-selector">
+      <button class="length-btn" data-length="4">4 Harf</button>
+      <button class="length-btn active" data-length="5">5 Harf</button>
+      <button class="length-btn" data-length="6">6 Harf</button>
+    </div>
+
+    <!-- Toast bildirimleri -->
+    <div id="toast-container"></div>
+
+    <!-- Oyun tahtasi -->
+    <div id="board-wrapper">
+      <div id="board"></div>
+    </div>
+
+    <!-- Turkce Klavye -->
+    <div id="keyboard">
+      <div class="keyboard-row">
+        <button class="key" data-key="e">e</button>
+        <button class="key" data-key="r">r</button>
+        <button class="key" data-key="t">t</button>
+        <button class="key" data-key="y">y</button>
+        <button class="key" data-key="u">u</button>
+        <button class="key" data-key="ı">ı</button>
+        <button class="key" data-key="o">o</button>
+        <button class="key" data-key="p">p</button>
+        <button class="key" data-key="ğ">ğ</button>
+        <button class="key" data-key="ü">ü</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key" data-key="a">a</button>
+        <button class="key" data-key="s">s</button>
+        <button class="key" data-key="d">d</button>
+        <button class="key" data-key="f">f</button>
+        <button class="key" data-key="g">g</button>
+        <button class="key" data-key="h">h</button>
+        <button class="key" data-key="j">j</button>
+        <button class="key" data-key="k">k</button>
+        <button class="key" data-key="l">l</button>
+        <button class="key" data-key="ş">ş</button>
+        <button class="key" data-key="i">i</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key key-wide" data-key="Enter">GIR</button>
+        <button class="key" data-key="z">z</button>
+        <button class="key" data-key="c">c</button>
+        <button class="key" data-key="v">v</button>
+        <button class="key" data-key="b">b</button>
+        <button class="key" data-key="n">n</button>
+        <button class="key" data-key="m">m</button>
+        <button class="key" data-key="ö">ö</button>
+        <button class="key" data-key="ç">ç</button>
+        <button class="key key-wide" data-key="Backspace">&#9003;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Yardim Modali -->
+  <div id="modal-help" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2>Nasil Oynanir?</h2>
+      <p>Gizli kelimeyi <strong>6 deneme</strong> icinde tahmin edin.</p>
+      <p>Her tahmininizden sonra karolarin rengi degisecek ve kelimenin ne kadar yakin oldugunu gosterecektir.</p>
+
+      <div class="example-section">
+        <p><strong>Ornekler:</strong></p>
+
+        <div class="example-row">
+          <div class="example-tile correct">K</div>
+          <div class="example-tile">A</div>
+          <div class="example-tile">L</div>
+          <div class="example-tile">E</div>
+          <div class="example-tile">M</div>
+        </div>
+        <p class="example-desc"><strong>K</strong> harfi kelimede var ve dogru yerde.</p>
+
+        <div class="example-row">
+          <div class="example-tile">B</div>
+          <div class="example-tile present">A</div>
+          <div class="example-tile">L</div>
+          <div class="example-tile">I</div>
+          <div class="example-tile">K</div>
+        </div>
+        <p class="example-desc"><strong>A</strong> harfi kelimede var ama yanlis yerde.</p>
+
+        <div class="example-row">
+          <div class="example-tile">S</div>
+          <div class="example-tile">I</div>
+          <div class="example-tile">L</div>
+          <div class="example-tile">A</div>
+          <div class="example-tile absent">H</div>
+        </div>
+        <p class="example-desc"><strong>H</strong> harfi kelimede yok.</p>
+      </div>
+
+      <p>Harf sayisini degistirerek 4, 5 veya 6 harfli kelimelerle oynayabilirsiniz. Sinirsiz oyun hakkiniz var!</p>
+    </div>
+  </div>
+
+  <!-- Istatistik Modali -->
+  <div id="modal-stats" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2>Istatistikler</h2>
+      <div id="stats-summary">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-played">0</div>
+          <div class="stat-label">Oynanan</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-win-pct">0</div>
+          <div class="stat-label">Kazanma %</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-current-streak">0</div>
+          <div class="stat-label">Mevcut Seri</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-max-streak">0</div>
+          <div class="stat-label">En Iyi Seri</div>
+        </div>
+      </div>
+      <h3>Tahmin Dagilimi</h3>
+      <div id="guess-distribution">
+        <div class="dist-row"><span class="dist-label">1</span><div class="dist-bar-wrapper"><div class="dist-bar" data-guess="1">0</div></div></div>
+        <div class="dist-row"><span class="dist-label">2</span><div class="dist-bar-wrapper"><div class="dist-bar" data-guess="2">0</div></div></div>
+        <div class="dist-row"><span class="dist-label">3</span><div class="dist-bar-wrapper"><div class="dist-bar" data-guess="3">0</div></div></div>
+        <div class="dist-row"><span class="dist-label">4</span><div class="dist-bar-wrapper"><div class="dist-bar" data-guess="4">0</div></div></div>
+        <div class="dist-row"><span class="dist-label">5</span><div class="dist-bar-wrapper"><div class="dist-bar" data-guess="5">0</div></div></div>
+        <div class="dist-row"><span class="dist-label">6</span><div class="dist-bar-wrapper"><div class="dist-bar" data-guess="6">0</div></div></div>
+      </div>
+      <button id="btn-share" class="share-btn">Sonucu Paylas</button>
+    </div>
+  </div>
+
+  <!-- Ayarlar Modali -->
+  <div id="modal-settings" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2>Ayarlar</h2>
+      <div class="setting-row">
+        <span class="setting-label">Karanlik Mod</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-theme">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label">Yeni Oyun</span>
+        <button id="btn-new-game" class="new-game-btn">Yeni Oyun Baslat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script dosyalari -->
+  <script src="data/words-4.js"></script>
+  <script src="data/words-5.js"></script>
+  <script src="data/words-6.js"></script>
+  <script src="js/dictionary.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/keyboard.js"></script>
+  <script src="js/stats.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
