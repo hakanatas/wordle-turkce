@@ -190,6 +190,7 @@ body {
   justify-content: center;
   overflow: hidden;
   padding: 8px;
+  min-height: 0;
 }
 
 #board {
@@ -215,6 +216,7 @@ body {
 
 .tile {
   aspect-ratio: 1;
+  max-height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -647,7 +649,7 @@ body {
   }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 750px) {
   #header {
     height: 40px;
   }
@@ -670,11 +672,56 @@ body {
   }
 
   .key {
-    height: 40px;
+    height: 42px;
   }
 
   #keyboard {
     padding: 4px 6px;
+  }
+}
+
+@media (max-height: 600px) {
+  #header {
+    height: 36px;
+  }
+
+  .header-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #word-length-selector {
+    padding: 2px 0;
+  }
+
+  .length-btn {
+    padding: 3px 10px;
+    font-size: 0.7rem;
+  }
+
+  .tile {
+    font-size: 1rem;
+    max-height: 48px;
+  }
+
+  .key {
+    height: 36px;
+  }
+
+  #keyboard {
+    padding: 2px 4px;
+  }
+
+  .keyboard-row {
+    margin-bottom: 2px;
+  }
+
+  #board-wrapper {
+    padding: 4px;
+  }
+
+  #board {
+    gap: 3px;
   }
 }
 
