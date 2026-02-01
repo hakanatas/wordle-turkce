@@ -109,6 +109,16 @@ window.WordleTR.App = {
   }
 };
 
+// Mobilde gercek viewport yuksekligini hesapla (adres cubugu + nav bar hesaba katilir)
+(function setVH() {
+  var vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+})();
+window.addEventListener('resize', function () {
+  var vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+});
+
 // Uygulama hazir oldugunda baslat
 document.addEventListener('DOMContentLoaded', function () {
   window.WordleTR.App.init();

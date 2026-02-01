@@ -1,4 +1,4 @@
-var CACHE_NAME = 'wordle-tr-v2';
+var CACHE_NAME = 'wordle-tr-v3';
 var ASSETS = [
   './',
   './index.html',
